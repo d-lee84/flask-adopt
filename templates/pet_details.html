@@ -3,9 +3,7 @@
 
 {% block content %}
 
-{% for msg in get_flashed_messages() %}
-    <h2>{{ msg }}</h2>
-{% endfor %}
+
 
 <h3>{{ pet.name}}</h3>
 
@@ -29,7 +27,7 @@
         {{ field }}
 
         {% for error in field.errors %}
-        {{error}}
+            {{error}}
         {% endfor %}
     </p>
 

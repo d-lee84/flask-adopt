@@ -3,6 +3,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, SelectField, BooleanField
 from wtforms.validators import InputRequired, Optional, Email, URL, AnyOf
 
+# Make age_choice a variable
+# Length validation on the notes?: Optional
+# Make species a select field?
 
 class AddPetForm(FlaskForm):
     """ The pet add form accessed from the homepage """

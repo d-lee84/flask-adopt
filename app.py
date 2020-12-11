@@ -27,7 +27,7 @@ toolbar = DebugToolbarExtension(app)
 
 
 @app.route('/')
-def show_listings():
+def show_pets():
     """ Shows the homepage and listing of the pets """
     pets = Pet.query.all()
     return render_template('homepage.html', pets=pets)
@@ -49,6 +49,7 @@ def add_pet():
         form.populate_obj(pet)
         db.session.add(pet)
         db.session.commit()
+        flash("Created successfully")
         return redirect("/")
     else: 
         return render_template("add_pet.html", form=form)
