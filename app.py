@@ -1,12 +1,12 @@
 """Flask app for adopt app."""
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, flash
 
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, Pet
 
-from forms import AddPetForm
+from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
 
@@ -21,7 +21,7 @@ db.create_all()
 # Having the Debug Toolbar show redirects explicitly is often useful;
 # however, if you want to turn it off, you can uncomment this line:
 #
-# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 toolbar = DebugToolbarExtension(app)
 
@@ -44,11 +44,30 @@ def add_pet():
         # photo_url = form.photo_url.data
         # age = form.age.data
         # notes = form.notes.data   
+
         pet = Pet()
         form.populate_obj(pet)
         db.session.add(pet)
         db.session.commit()
         return redirect("/")
     else: 
-        render_template("/add", form=form)
+        return render_template("add_pet.html", form=form)
+
+
+@app.route('/<int:pet_id>', methods=["GET", "POST"])
+def handle_pet_listing_and_edit_form(pet_id):
+    """ Handle showing pet information and edit form """
+
+    pet = Pet.query.get_or_404(pet_id)
+    form = EditPetForm(obj=pet)
+
+    if form.validate_on_submit():
+        form.populate_obj(pet)
+        db.session.commit()
+
+        flash("The edit has been submitted!")
+
+        return redirect(f"/{pet.id}")
+    else:
+        return render_template("pet_details.html", form=form, pet=pet)
 
