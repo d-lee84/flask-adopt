@@ -2,7 +2,7 @@
 
 
 {% block content %}
-
+<h1>Our Pets</h1>
 {% for pet in pets %}
 
 {% if pet.photo_url %}
@@ -14,6 +14,12 @@
 {% endif %}
 
 {% endfor %}
+<!-- random pet -->
+<h2>Random Petfinder Pet</h2>
+{% if random_pet['photo_url'] %}
+    <img src="{{ random_pet['photo_url']}}" alt="Image of {{ random_pet['name']}}">
+{% endif %}
+<h3>{{random_pet['name']}} Age: {{random_pet['age']}}</h3>
 
 <form action="/add">
     <button type="submit">Add a Pet</button>

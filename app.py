@@ -8,6 +8,8 @@ from models import db, connect_db, Pet
 
 from forms import AddPetForm, EditPetForm
 
+from pet_finder import get_random_pet
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = "secret"
@@ -30,7 +32,8 @@ toolbar = DebugToolbarExtension(app)
 def show_pets():
     """ Shows the homepage and listing of the pets """
     pets = Pet.query.all()
-    return render_template('homepage.html', pets=pets)
+    random_pet =  get_random_pet()
+    return render_template('homepage.html', pets=pets, random_pet=random_pet)
 
 
 @app.route('/add', methods=["GET","POST"])
