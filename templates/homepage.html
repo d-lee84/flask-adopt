@@ -6,14 +6,24 @@
 {% for pet in pets %}
 
 {% if pet.photo_url %}
-<img src="{{ pet.photo_url }}" alt="Image of {{ pet.name}}">
+<img src="{{ pet.photo_url }}" class="img-fluid" alt="Image of {{ pet.name}}">
 {% endif %}
-<h3><a href="/{{ pet.id }}">{{ pet.name }}</a></h3>
-{% if pet.available %}
-<b>is available!</b>
-{% endif %}
+<h3>
+    <a href="/{{ pet.id }}">
+        {{ pet.name }}
+        {% if pet.available %}
+            <b>is available!</b>
+        {% endif %}
+    </a> 
+</h3>
+
 
 {% endfor %}
+
+<form action="/add">
+    <button type="submit">Add a Pet</button>
+</form>
+
 <!-- random pet -->
 <h2>Random Petfinder Pet</h2>
 {% if random_pet['photo_url'] %}
@@ -21,8 +31,5 @@
 {% endif %}
 <h3>{{random_pet['name']}} Age: {{random_pet['age']}}</h3>
 
-<form action="/add">
-    <button type="submit">Add a Pet</button>
-</form>
 
 {% endblock %}

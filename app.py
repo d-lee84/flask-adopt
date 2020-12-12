@@ -41,6 +41,7 @@ def add_pet():
     """ handle add pet form"""
 
     form = AddPetForm()
+    
     if form.validate_on_submit():
         # name = form.name.data
         # species = form.species.data
@@ -50,6 +51,9 @@ def add_pet():
 
         pet = Pet()
         form.populate_obj(pet)
+
+
+
         db.session.add(pet)
         db.session.commit()
         flash("Created successfully")
