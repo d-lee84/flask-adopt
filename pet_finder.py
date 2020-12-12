@@ -9,8 +9,8 @@ PET_URL = "https://api.petfinder.com/v2/animals?limit=100"
 def get_token_request():
     """ make api get request to get an Oauth token"""
     resp = requests.post(TOKEN_URL, data={"grant_type": "client_credentials",
-                                     "client_id": API_KEY,
-                                     "client_secret": SECRET})
+                                          "client_id": API_KEY,
+                                          "client_secret": SECRET})
     # breakpoint()
     # print(resp)
     token = resp.json()["access_token"]

@@ -32,7 +32,7 @@ toolbar = DebugToolbarExtension(app)
 def show_pets():
     """ Shows the homepage and listing of the pets """
     pets = Pet.query.all()
-    random_pet =  get_random_pet()
+    random_pet = get_random_pet()
     return render_template('homepage.html', pets=pets, random_pet=random_pet)
 
 
